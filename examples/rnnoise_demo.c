@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
   float x[FRAME_SIZE];
   RNNModel *model = NULL;
   FILE *f1, *fout;
-  FILE *model_fptr;
+  FILE *model_fptr = NULL;
   DenoiseState *st;
 
   if (argc < 3) {
