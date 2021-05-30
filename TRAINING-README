@@ -1,11 +1,15 @@
 (1) cd src ; ./compile.sh
 
-(2) ./denoise_training signal.raw noise.raw count > training.f32
+(2) ./denoise_training signal.raw noise.raw 500000 > training.f32
 
     (note the matrix size and replace 500000 87 below)
 
-(3) cd training ; ./bin2hdf5.py ../src/training.f32 500000 87 training.h5
+(3) cd ../training ; ./bin2hdf5.py ../src/training.f32 500000 87 training.h5
 
 (4) ./rnn_train.py
 
-(5) ./dump_rnn.py weights.hdf5 ../src/rnn_data.c ../src/rnn_data.h
+    (generates 
+      a. rnn_data.c which can be place at ../src/rnn_data.c to embed as default model
+      b. model_data.rnn can be used to load model from file check examples/rnnoise_demo.c)
+
+(5) ./dump_rnn.py weights.hdf5 ./rnn_data.c ./model_data.rnn orig
